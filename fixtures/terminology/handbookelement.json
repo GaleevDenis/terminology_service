@@ -1,0 +1,38 @@
+[
+    {
+        "model": "terminology.handbookelement",
+        "pk": 3,
+        "fields": {
+            "version": 3,
+            "element_code": "1",
+            "value": "Врач-терапевт"
+        }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 4,
+        "fields": {
+            "version": 3,
+            "element_code": "2",
+            "value": "Травматолог-ортопед"
+        }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 5,
+        "fields": {
+            "version": 3,
+            "element_code": "3",
+            "value": "Хирург"
+        }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 6,
+        "fields": {
+            "version": 6,
+            "element_code": "4",
+            "value": "Лор"
+        }
+    }
+]
