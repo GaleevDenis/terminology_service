@@ -1,20 +1,11 @@
 [
     {
         "model": "terminology.handbook",
-        "pk": 3,
+        "pk": 1,
         "fields": {
             "code": "1",
             "name": "Специальности медицинских работников",
-            "description": "Справочник специальностей медицинских работников"
-        }
-    },
-    {
-        "model": "terminology.handbook",
-        "pk": 4,
-        "fields": {
-            "code": "2",
-            "name": "Справочник болезней",
-            "description": ""
+            "description": "Справочник медицинских работников учреждения"
         }
     }
 ]
