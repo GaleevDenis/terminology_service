@@ -1,10 +1,8 @@
 from django.db import models
 
-# Create your models here.
 
 class Handbook(models.Model):
-    """"Класс представляющий Cправочник"""
-
+    """Модель справочника"""
     code = models.CharField(max_length=100, unique=True, verbose_name='Код')
     name = models.CharField(max_length=300, verbose_name='Наименование')
     description = models.TextField(blank=True, null=True, verbose_name='Описание')
@@ -17,9 +15,9 @@ class Handbook(models.Model):
     def __str__(self):
         return f'{self.name}'
 
-class HandbookVersion(models.Model):
-    """Класс представлящий Версии справочника"""
 
+class HandbookVersion(models.Model):
+    """Модель версии справочника"""
     handbook = models.ForeignKey(to=Handbook, on_delete=models.CASCADE, related_name='versions', 
                                 verbose_name='Справочник')
     version = models.CharField(max_length=50, verbose_name='Версия')
@@ -34,9 +32,9 @@ class HandbookVersion(models.Model):
     def __str__(self):
         return f"{self.handbook.name} - {self.version}"
 
-class HandbookElement(models.Model):
-    """"Класс представлящий Элементы справочников"""
 
+class HandbookElement(models.Model):
+    """Модель Элементов справочников"""
     version = models.ForeignKey(to=HandbookVersion, on_delete=models.CASCADE, related_name='elements',
                                 verbose_name='Справочник-версия')
     element_code = models.CharField(max_length=100, verbose_name='Код элемента')
