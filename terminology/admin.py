@@ -40,7 +40,7 @@ class HandbookAdmin(admin.ModelAdmin):
         if obj.versions.filter(effective_date__lte=date.today()).aggregate(max_date=Max('effective_date'))['max_date'] is not None:
             return str(obj.versions.filter(effective_date__lte=date.today()).aggregate(max_date=Max('effective_date'))['max_date'])
         else:
-            return 'Даты начала не существует'
+            return 'Даты начала действия версии не существует'
         
 
 class HandbookElementInline(admin.TabularInline):

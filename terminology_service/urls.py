@@ -15,15 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 from debug_toolbar.toolbar import debug_toolbar_urls
-
-from terminology.views import TerminologyAPIView
+from terminology import views
 from terminology_service.settings import DEBUG
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/handbooklist/', TerminologyAPIView.as_view())
+#    re_path(r'^refbooks/(?P<year>[0-9]{4})-(?P<month>[0-1][0-9])-(?P<day>[0-3][0-9])', views.HandbookListAPIView.as_view())
+    path('refbooks/<int:id>/elements/', views.HandbookElementAPIViev.as_view()),
+    path('refbooks/', views.HandbookListAPIView.as_view())
 ]
 
 if DEBUG:
