@@ -1,14 +1,11 @@
-from typing import Any
-from urllib import request
-from django.shortcuts import render
-from rest_framework import generics
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from django.http import HttpResponse
-from django.db.models import Q, Max
-from .serializers import HandbookSerializer, HandbookElementSerializer
-from .models import Handbook, HandbookElement, HandbookVersion
 from datetime import date, datetime
+
+from rest_framework import generics
+from rest_framework.response import Response
+from django.db.models import Q, Max
+
+from .serializers import HandbookSerializer, HandbookElementSerializer
+from .models import Handbook, HandbookElement
 
 
 class GetHandbookListAPIView(generics.ListAPIView):

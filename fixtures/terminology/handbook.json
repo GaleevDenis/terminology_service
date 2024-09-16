@@ -16,5 +16,14 @@
             "name": "Справочник болезней",
             "description": ""
         }
+    },
+    {
+        "model": "terminology.handbook",
+        "pk": 3,
+        "fields": {
+            "code": "3",
+            "name": "Список адресов",
+            "description": ""
+        }
     }
 ]

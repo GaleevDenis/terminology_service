@@ -43,5 +43,32 @@
             "code": "1",
             "value": "Вирусная инфекция"
         }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 6,
+        "fields": {
+            "version_id": 3,
+            "code": "2",
+            "value": "Лихорадка"
+        }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 7,
+        "fields": {
+            "version_id": 6,
+            "code": "3",
+            "value": "Вирусные заболевания"
+        }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 8,
+        "fields": {
+            "version_id": 6,
+            "code": "4",
+            "value": "Заболевания жкт"
+        }
     }
 ]

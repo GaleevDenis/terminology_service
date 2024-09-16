@@ -3,6 +3,7 @@ from django.db import models
 
 class Handbook(models.Model):
     """Модель справочника"""
+
     code = models.CharField(max_length=100, unique=True, verbose_name='Код')
     name = models.CharField(max_length=300, verbose_name='Наименование')
     description = models.TextField(blank=True, null=True, verbose_name='Описание')
@@ -18,10 +19,11 @@ class Handbook(models.Model):
 
 class HandbookVersion(models.Model):
     """Модель версии справочника"""
+
     handbook_id = models.ForeignKey(to=Handbook, on_delete=models.CASCADE, related_name='version_model', 
                                 verbose_name='Справочник')
     version = models.CharField(max_length=50, verbose_name='Версия')
-    effective_date = models.DateField(verbose_name='Дата начала действия версии справочника')
+    effective_date = models.DateField(verbose_name='Дата начала версии')
 
     class Meta:
         db_table = 'handbookversion'
@@ -35,6 +37,7 @@ class HandbookVersion(models.Model):
 
 class HandbookElement(models.Model):
     """Модель Элементов справочников"""
+    
     version_id = models.ForeignKey(to=HandbookVersion, on_delete=models.CASCADE, related_name='element_model',
                                 verbose_name='Справочник-версия')
     code = models.CharField(max_length=100, verbose_name='Код элемента')
