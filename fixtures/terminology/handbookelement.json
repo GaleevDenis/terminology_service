@@ -3,8 +3,8 @@
         "model": "terminology.handbookelement",
         "pk": 1,
         "fields": {
-            "version": 1,
-            "element_code": "1",
+            "version_id": 1,
+            "code": "1",
             "value": "Врач-терапевт"
         }
     },
@@ -12,8 +12,8 @@
         "model": "terminology.handbookelement",
         "pk": 2,
         "fields": {
-            "version": 1,
-            "element_code": "2",
+            "version_id": 1,
+            "code": "2",
             "value": "Травматолог-ортопед"
         }
     },
@@ -21,8 +21,8 @@
         "model": "terminology.handbookelement",
         "pk": 3,
         "fields": {
-            "version": 2,
-            "element_code": "3",
+            "version_id": 2,
+            "code": "3",
             "value": "Хирург"
         }
     },
@@ -30,9 +30,18 @@
         "model": "terminology.handbookelement",
         "pk": 4,
         "fields": {
-            "version": 2,
-            "element_code": "4",
+            "version_id": 2,
+            "code": "4",
             "value": "Стоматолог"
+        }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 5,
+        "fields": {
+            "version_id": 3,
+            "code": "1",
+            "value": "Вирусная инфекция"
         }
     }
 ]

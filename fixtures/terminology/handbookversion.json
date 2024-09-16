@@ -3,18 +3,27 @@
         "model": "terminology.handbookversion",
         "pk": 1,
         "fields": {
-            "handbook": 1,
+            "handbook_id": 1,
             "version": "1.0",
-            "effective_date": "2020-09-14"
+            "effective_date": "2020-09-16"
         }
     },
     {
         "model": "terminology.handbookversion",
         "pk": 2,
         "fields": {
-            "handbook": 1,
+            "handbook_id": 1,
             "version": "1.1",
-            "effective_date": "2021-09-14"
+            "effective_date": "2021-09-13"
+        }
+    },
+    {
+        "model": "terminology.handbookversion",
+        "pk": 3,
+        "fields": {
+            "handbook_id": 2,
+            "version": "1.0",
+            "effective_date": "2021-09-13"
         }
     }
 ]

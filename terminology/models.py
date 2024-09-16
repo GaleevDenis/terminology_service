@@ -18,31 +18,31 @@ class Handbook(models.Model):
 
 class HandbookVersion(models.Model):
     """Модель версии справочника"""
-    handbook = models.ForeignKey(to=Handbook, on_delete=models.CASCADE, related_name='versions', 
+    handbook_id = models.ForeignKey(to=Handbook, on_delete=models.CASCADE, related_name='version_model', 
                                 verbose_name='Справочник')
     version = models.CharField(max_length=50, verbose_name='Версия')
     effective_date = models.DateField(verbose_name='Дата начала действия версии справочника')
 
     class Meta:
         db_table = 'handbookversion'
-        unique_together = ('handbook', 'version'), ('handbook', 'effective_date')
+        unique_together = ('handbook_id', 'version'), ('handbook_id', 'effective_date')
         verbose_name = 'Версия справочника'
         verbose_name_plural = 'Версии справочника'
 
     def __str__(self):
-        return f"{self.handbook.name} - {self.version}"
+        return f"{self.handbook_id.name} - {self.version}"
 
 
 class HandbookElement(models.Model):
     """Модель Элементов справочников"""
-    version = models.ForeignKey(to=HandbookVersion, on_delete=models.CASCADE, related_name='elements',
+    version_id = models.ForeignKey(to=HandbookVersion, on_delete=models.CASCADE, related_name='element_model',
                                 verbose_name='Справочник-версия')
-    element_code = models.CharField(max_length=100, verbose_name='Код элемента')
+    code = models.CharField(max_length=100, verbose_name='Код элемента')
     value = models.CharField(max_length=300, verbose_name='Значение элемента')
 
     class Meta:
         db_table = 'handbookelement'
-        unique_together = ('version', 'element_code')
+        unique_together = ('version_id', 'code')
         verbose_name = 'Элемент справочника'
         verbose_name_plural = 'Элементы справочников'
 

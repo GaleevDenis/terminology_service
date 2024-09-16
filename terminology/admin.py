@@ -1,6 +1,6 @@
 from bdb import effective
 from django.contrib import admin
-from django.db.models import Max, Min
+from django.db.models import Max
 from django.db.models.functions import Cast
 from django.db.models import FloatField
 from .models import Handbook, HandbookElement, HandbookVersion
@@ -27,18 +27,18 @@ class HandbookAdmin(admin.ModelAdmin):
 
     @admin.display(description='Текущая версия')
     def get_handbook_version(self, obj):
-        """Отображение самой поздней версии справочника до текущей даты включительно"""
-        current_version = obj.versions.filter(effective_date__lte=date.today()).aggregate(max_date=Max('effective_date'))['max_date']
+        """Поиск самой поздней версии справочника до текущей даты включительно"""
+        current_version = obj.version_model.filter(effective_date__lte=date.today()).aggregate(max_date=Max('effective_date'))['max_date']
         if current_version is not None:
-            return str(obj.versions.filter(effective_date=current_version)[0].version)
+            return str(obj.version_model.filter(effective_date=current_version)[0].version)
         else:
             return 'Актуальной версии не существует'
         
     @admin.display(description='Дата начала действия версии справочника')
     def get_handbook_effective_date(self, obj):
         """Поиск самой поздней даты начала действия версии справочника до текущей даты включительно"""
-        if obj.versions.filter(effective_date__lte=date.today()).aggregate(max_date=Max('effective_date'))['max_date'] is not None:
-            return str(obj.versions.filter(effective_date__lte=date.today()).aggregate(max_date=Max('effective_date'))['max_date'])
+        if obj.version_model.filter(effective_date__lte=date.today()).aggregate(max_date=Max('effective_date'))['max_date'] is not None:
+            return str(obj.version_model.filter(effective_date__lte=date.today()).aggregate(max_date=Max('effective_date'))['max_date'])
         else:
             return 'Даты начала действия версии не существует'
         
@@ -47,7 +47,7 @@ class HandbookElementInline(admin.TabularInline):
     """Встраиваемая модель которая будет использоваться при редактировании версий справочников"""
     model = HandbookElement
     extra = 0
-    ordering = ('element_code', 'value')
+    ordering = ('code', 'value')
 
 @admin.register(HandbookVersion)
 class HandbookVersionAdmin(admin.ModelAdmin):
@@ -57,19 +57,19 @@ class HandbookVersionAdmin(admin.ModelAdmin):
     list_display_links = ('get_handbook_name', )
     list_filter = ('version', 'effective_date')
     search_fields = ('get_handbook_code', 'get_handbook_name', 'version', 'effective_date')
-    fields = ('handbook', 'version', 'effective_date')
+    fields = ('handbook_id', 'version', 'effective_date')
     ordering = ('-version', '-effective_date')
     list_per_page = 10
 
     @admin.display(description='Код')
     def get_handbook_code(self, obj):
         """Отображение кода справочника"""
-        return str(obj.handbook.code)
+        return str(obj.handbook_id.code)
     
     @admin.display(description='Наименование')
     def get_handbook_name(self, obj):
         """Отображение наименования справочника"""
-        return str(obj.handbook.name)
+        return str(obj.handbook_id.name)
 
     class Meta:
         model = HandbookVersion
@@ -78,12 +78,12 @@ class HandbookVersionAdmin(admin.ModelAdmin):
 @admin.register(HandbookElement)
 class HandbookElementAdmin(admin.ModelAdmin):
     """Отображение, сортировка и фильтрация элементов справочников в административной панели"""
-    list_display = ('element_code', 'value','version')
+    list_display = ('code', 'value','version_id')
     list_display_links = ('value', )
-    list_filter = ('version', 'element_code', 'value')
-    search_fields = ('version', 'element_code', 'value')
-    fields = ('version', 'element_code', 'value')
-    ordering = ('element_code', 'value')
+    list_filter = ('version_id', 'code', 'value')
+    search_fields = ('version_id', 'code', 'value')
+    fields = ('version_id', 'code', 'value')
+    ordering = ('code', 'value')
     list_per_page = 10
 
     class Meta:
