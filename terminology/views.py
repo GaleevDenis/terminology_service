@@ -2,15 +2,21 @@ from datetime import date, datetime
 
 from rest_framework import generics
 from rest_framework.response import Response
-from django.db.models import Q, Max
+from django.db.models import Q, Max, OrderBy
+from drf_yasg.utils import swagger_auto_schema
 
 from .serializers import HandbookSerializer, HandbookElementSerializer
 from .models import Handbook, HandbookElement
+from .swagger import GetParamSwagger
 
 
 class GetHandbookListAPIView(generics.ListAPIView):
     """Получение списка справочников (+ актуальных на указанную дату)"""
 
+    @swagger_auto_schema(manual_parameters= GetParamSwagger.manual_parameters('date', ),
+                         responses=GetParamSwagger.responses_handbook_list(),
+                         tags=['Получение списка справочников'],
+                         operation_description=GetParamSwagger.operation_description('1'), )
     def get(self, request): 
         # Проверяем было ли в GET запросе значение date
         if (get_date := request.GET.get('date', '')) != '':
@@ -18,7 +24,7 @@ class GetHandbookListAPIView(generics.ListAPIView):
             try:
                 converted_date = datetime.strptime(get_date, "%Y-%m-%d").date()
             except ValueError:
-                return Response({'error': 'Введен некорректный формат даты - корректный формат: YYYY-MM_DD'}, status=400)
+                return Response({'error': ['Введен некорректный формат даты - корректный формат: YYYY-MM_DD']}, status=400)
             # фильтруем справочники по дате начала действия версии раньше или равной указанной в converted_date в связанной модели version_model
             queryset = Handbook.objects.prefetch_related('version_model').filter(
                 version_model__effective_date__lte=converted_date)
@@ -31,18 +37,22 @@ class GetHandbookListAPIView(generics.ListAPIView):
                         unique_handbooks.append(handbook)
                 return Response({'refbooks': HandbookSerializer(unique_handbooks, many=True).data})
             else:
-                return Response({'refbooks': ['Не найдены справочники с датой начала действия версии раннее или равной указанной']}, status=404)
+                return Response({'not_found_2': ['Не найдены справочники с датой начала действия версии раннее или равной указанной']}, status=404)
         else:
             queryset = Handbook.objects.all()
             if len(queryset) != 0:
                 return Response({'refbooks': HandbookSerializer(queryset, many=True).data})
             else:
-                return Response({'refbooks': ['Не найдены справочники']}, status=404)
+                return Response({'not_found': ['Не найдены справочники']}, status=404)
             
 
 class GetHandbookElementAPIViev(generics.ListAPIView):
     """Получение элементов заданного справочника"""
 
+    @swagger_auto_schema(manual_parameters= GetParamSwagger.manual_parameters('id', 'version', ),
+                         responses=GetParamSwagger.responses_get_element(),
+                         tags=['Получение элементов заданного справочника'],
+                         operation_description=GetParamSwagger.operation_description('2'),)
     def get(self, request, id):
         # Проверяем было ли передано значение version
         if (get_version := request.GET.get('version', '')) != '':
@@ -52,7 +62,7 @@ class GetHandbookElementAPIViev(generics.ListAPIView):
             if len(queryset) != 0:
                 return Response({'elements': HandbookElementSerializer(queryset, many=True).data})
             else:
-                return Response({'elements': ['Не найдены элементы указанной версии справочника']}, status=404)
+                return Response({'not_found': ['Не найдены элементы указанной версии справочника']}, status=404)
         else:
             # Получаем элементы справочника, предварительно загрузив связанные обьекты с version_id
             queryset = HandbookElement.objects.prefetch_related('version_id')
@@ -66,12 +76,16 @@ class GetHandbookElementAPIViev(generics.ListAPIView):
             if len(queryset) != 0:
                 return Response({'elements': HandbookElementSerializer(queryset, many=True).data})
             else:
-                return Response({'elements': ['Не найдены элементы текущей версии справочника']}, status=404)
+                return Response({'not_found_2': ['Не найдены элементы текущей версии справочника']}, status=404)
 
 
 class CheckHandbookElementAPIViev(generics.ListAPIView):
     """Проверка на то, что элемент с данным кодом и значением присутствует в указанной версии справочника"""
 
+    @swagger_auto_schema(manual_parameters= GetParamSwagger.manual_parameters('id', 'code', 'value', 'version', ),
+                         responses=GetParamSwagger.responses_check_element(),
+                         tags=['Валидация элемента'],
+                         operation_description=GetParamSwagger.operation_description('3'),)
     def get(self, request, id):
         get_code_element = request.GET.get('code', '')
         get_value_element = request.GET.get('value', '')
@@ -90,3 +104,4 @@ class CheckHandbookElementAPIViev(generics.ListAPIView):
             return Response({'validation': HandbookElementSerializer(queryset, many=True).data})
         else:
             return Response({'validation': ['Не найден элемент']}, status=404)
+        
