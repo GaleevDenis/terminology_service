@@ -20,7 +20,7 @@ class Handbook(models.Model):
 class HandbookVersion(models.Model):
     """Модель версии справочника"""
 
-    handbook_id = models.ForeignKey(to=Handbook, on_delete=models.CASCADE, related_name='version_model', 
+    handbook_id = models.ForeignKey(to=Handbook, on_delete=models.CASCADE, related_name='version_model',
                                 verbose_name='Справочник')
     version = models.CharField(max_length=50, verbose_name='Версия')
     effective_date = models.DateField(verbose_name='Дата начала версии')
@@ -37,7 +37,7 @@ class HandbookVersion(models.Model):
 
 class HandbookElement(models.Model):
     """Модель Элементов справочников"""
-    
+
     version_id = models.ForeignKey(to=HandbookVersion, on_delete=models.CASCADE, related_name='element_model',
                                 verbose_name='Справочник-версия')
     code = models.CharField(max_length=100, verbose_name='Код элемента')

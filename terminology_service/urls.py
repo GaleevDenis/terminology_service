@@ -17,11 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from debug_toolbar.toolbar import debug_toolbar_urls
-from terminology import views
-from terminology_service.settings import DEBUG
 from rest_framework import permissions
-from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+
+from terminology_service.settings import DEBUG
+from terminology import views
 
 
 schema_view = get_schema_view(
@@ -35,7 +36,6 @@ schema_view = get_schema_view(
    ),
    public=True,
    permission_classes=(permissions.AllowAny,),
-   
 )
 
 urlpatterns = [

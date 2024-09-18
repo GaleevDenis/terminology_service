@@ -1,1 +1,74 @@
-[{"model": "terminology.handbookelement", "pk": 1, "fields": {"version_id": 1, "code": "1", "value": "Врач-терапевт"}}, {"model": "terminology.handbookelement", "pk": 2, "fields": {"version_id": 1, "code": "2", "value": "Травматолог-ортопед"}}, {"model": "terminology.handbookelement", "pk": 3, "fields": {"version_id": 2, "code": "3", "value": "Хирург"}}, {"model": "terminology.handbookelement", "pk": 4, "fields": {"version_id": 2, "code": "4", "value": "Стоматолог"}}, {"model": "terminology.handbookelement", "pk": 5, "fields": {"version_id": 3, "code": "1", "value": "Вирусная инфекция"}}, {"model": "terminology.handbookelement", "pk": 6, "fields": {"version_id": 3, "code": "2", "value": "Лихорадка"}}, {"model": "terminology.handbookelement", "pk": 7, "fields": {"version_id": 6, "code": "3", "value": "Вирусные заболевания"}}, {"model": "terminology.handbookelement", "pk": 8, "fields": {"version_id": 6, "code": "4", "value": "Заболевания жкт"}}]
+[
+    {
+        "model": "terminology.handbookelement",
+        "pk": 1,
+        "fields": {
+            "version_id": 1,
+            "code": "1",
+            "value": "Врач-терапевт"
+        }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 2,
+        "fields": {
+            "version_id": 1,
+            "code": "2",
+            "value": "Травматолог-ортопед"
+        }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 3,
+        "fields": {
+            "version_id": 2,
+            "code": "3",
+            "value": "Хирург"
+        }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 4,
+        "fields": {
+            "version_id": 2,
+            "code": "4",
+            "value": "Стоматолог"
+        }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 5,
+        "fields": {
+            "version_id": 3,
+            "code": "1",
+            "value": "Вирусная инфекция"
+        }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 6,
+        "fields": {
+            "version_id": 3,
+            "code": "2",
+            "value": "Лихорадка"
+        }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 7,
+        "fields": {
+            "version_id": 6,
+            "code": "3",
+            "value": "Вирусные заболевания"
+        }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 8,
+        "fields": {
+            "version_id": 6,
+            "code": "4",
+            "value": "Заболевания жкт"
+        }
+    }
+]
