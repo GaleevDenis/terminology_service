@@ -17,7 +17,7 @@ class HandbookVersionInline(admin.TabularInline):
 @admin.register(Handbook)
 class HandbookAdmin(admin.ModelAdmin):
     """Отображение, сортировка и фильтрация справочников в административной панели"""    
-    
+
     inlines = [HandbookVersionInline] # какие модели нужно отображать при редактировании
     list_display = ('id', 'code', 'name', 'get_handbook_version', 'get_handbook_effective_date') # какие поля отображаются
     list_display_links = ('name', ) # кликабельные категории
@@ -35,8 +35,8 @@ class HandbookAdmin(admin.ModelAdmin):
         if current_version is not None:
             return str(obj.version_model.filter(effective_date=current_version)[0].version)
         else:
-            return 'Актуальной версии не существует'
-        
+            return 'Актуальной версии нет'
+
     @admin.display(description='Дата начала действия версии')
     def get_handbook_effective_date(self, obj):
         """Поиск самой поздней даты начала действия версии справочника до текущей даты включительно"""
@@ -44,8 +44,8 @@ class HandbookAdmin(admin.ModelAdmin):
         if obj.version_model.filter(effective_date__lte=date.today()).aggregate(max_date=Max('effective_date'))['max_date'] is not None:
             return str(obj.version_model.filter(effective_date__lte=date.today()).aggregate(max_date=Max('effective_date'))['max_date'])
         else:
-            return 'Даты начала действия версии не существует'
-        
+            return 'Даты начала действия версии нет'
+
 
 class HandbookElementInline(admin.TabularInline):
     """Встраиваемая модель которая будет использоваться при редактировании версий справочников"""
@@ -73,7 +73,7 @@ class HandbookVersionAdmin(admin.ModelAdmin):
         """Отображение кода справочника"""
 
         return str(obj.handbook_id.code)
-    
+
     @admin.display(description='Наименование справочника')
     def get_handbook_name(self, obj):
         """Отображение наименования справочника"""
@@ -82,12 +82,12 @@ class HandbookVersionAdmin(admin.ModelAdmin):
 
     class Meta:
         model = HandbookVersion
-    
+
 
 @admin.register(HandbookElement)
 class HandbookElementAdmin(admin.ModelAdmin):
     """Отображение, сортировка и фильтрация элементов справочников в административной панели"""
-    
+
     list_display = ('code', 'value','version_id', )
     list_display_links = ('value', )
     list_filter = ('version_id', 'code', 'value', )

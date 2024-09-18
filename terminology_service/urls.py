@@ -24,7 +24,7 @@ from drf_yasg.views import get_schema_view
 from terminology_service.settings import DEBUG
 from terminology import views
 
-
+# Настройки отображения схемы в swagger
 schema_view = get_schema_view(
    openapi.Info(
       title="Сервис терминологии",
@@ -40,12 +40,11 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('refbooks/<int:id>/check_element/', views.CheckHandbookElementAPIViev.as_view()),
-    path('refbooks/<int:id>/elements/', views.GetHandbookElementAPIViev.as_view()),
-    path('refbooks/', views.GetHandbookListAPIView.as_view()),
+    path('refbooks/<int:id>/check_element/', views.CheckElementHandbookAPIView.as_view()),
+    path('refbooks/<int:id>/elements/', views.GetElementsHandbookAPIView.as_view()),
+    path('refbooks/', views.GetListHandbooksAPIView.as_view()),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('swagger/yaml', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    path('swagger/json', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
 
