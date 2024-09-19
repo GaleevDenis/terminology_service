@@ -24,7 +24,7 @@ class HandbookAdmin(admin.ModelAdmin):
     list_filter = ('name', 'code') # фильтрация по значениям полей
     search_fields = ('code', 'name') # поля по которым происходит поиск
     fields = ('name', 'code', 'description') # поля при редактировании записи
-    ordering = ('code', ) # Сортировка в административной панели
+    ordering = ('id', ) # Сортировка в административной панели
     list_per_page = 10 # кол-во строк на одной странице
 
     @admin.display(description='Текущая версия')

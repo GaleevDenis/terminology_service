@@ -70,5 +70,14 @@
             "code": "4",
             "value": "Заболевания жкт"
         }
+    },
+    {
+        "model": "terminology.handbookelement",
+        "pk": 10,
+        "fields": {
+            "version_id": 7,
+            "code": "1",
+            "value": "625006"
+        }
     }
 ]

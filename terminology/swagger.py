@@ -33,29 +33,30 @@ class SettingsViewSwagger:
     def responses(self):
         """Обьявление ожидаемой информации от сервера при разных кодах запроса"""
 
-        get_list_handbooks = {200: openapi.Response( "Удачная операция", HandbookSerializer,
+        get_list_handbooks = {200: openapi.Response("Удачная операция", HandbookSerializer,
                                           examples={"application/json": {"refbooks": [
                                               {"id": 1,"code": "1","name": "Специальности медицинских работников"},
                                               {"id": 2,"code": "2","name": "Справочник болезней"},
                                               {"id": 3,"code": "3","name": "Список адресов"}]}}),
-                                          400: openapi.Response( "Некорректный формат даты", HandbookSerializer,
+                                          400: openapi.Response("Некорректный формат даты", HandbookSerializer,
                                           examples={"application/json":
-                                                    {'error': ['Введен некорректный формат даты - корректный формат: YYYY-MM_DD']}},),
+                                                    {'error': ['Введен некорректный формат даты - корректный формат: YYYY-MM_DD']}}),
                                           404: openapi.Response( "Не найдены справочники", HandbookSerializer,
                                           examples={"application/json": {'not_found': ['Не найдены справочники'],
                                                                          'not_found_2': ['Не найдены справочники с датой начала действия версии'
-                                                                                         ' раннее или равной указанной']}},),}
-        get_elements_handbook = {200: openapi.Response( "Удачная операция", HandbookElementSerializer,
+                                                                                         ' раннее или равной указанной']}})}
+        get_elements_handbook = {200: openapi.Response("Удачная операция", HandbookElementSerializer,
                                           examples={"application/json": {"elements": [{"code": "1", "value": "Вирусная инфекция"},
                                                                                       {"code": "2", "value": "Лихорадка"}]}}),
-                                          404: openapi.Response( "Не найдены элементы", HandbookElementSerializer,
-                                          examples={"application/json": {'not_found': ['Не найдены элементы указанной версии справочника'],
-                                                                         'not_found_2': ['Не найдены элементы текущей версии справочника']}},)
+                                          404: openapi.Response("Не найдены элементы", HandbookElementSerializer,
+                                          examples={"application/json": {'not_found': ['Не найдены элементы в указанной версии справочника'],
+                                                                         'not_found_2': ['Не найдены элементы в текущей версии справочника']}})
                                           }
-        check_element_handbook = {200: openapi.Response( "Удачная операция", HandbookElementSerializer,
+        check_element_handbook = {200: openapi.Response("Удачная операция", HandbookElementSerializer,
                                           examples={"application/json": {"validation": [{"code": "3", "value": "Хирург"}]}}),
                                           404: openapi.Response( "Не найден элемент", HandbookElementSerializer,
-                                          examples={"application/json": {"not_found": ["Не найден элемент"]}},)
+                                          examples={"application/json": {"not_found": ["Не найден элемент"],
+                                                                         'not_found_2': ['Не найден элемент в текущей версии справочника']}})
                                           }
         match self.class_name:
             case 'get_list_handbooks':

@@ -3,7 +3,7 @@
         "model": "terminology.handbook",
         "pk": 1,
         "fields": {
-            "code": "1",
+            "code": "ms1",
             "name": "Специальности медицинских работников",
             "description": "Справочник специальностей медицинских работников"
         }
@@ -12,7 +12,7 @@
         "model": "terminology.handbook",
         "pk": 2,
         "fields": {
-            "code": "2",
+            "code": "km2",
             "name": "Справочник болезней",
             "description": ""
         }
@@ -21,8 +21,26 @@
         "model": "terminology.handbook",
         "pk": 3,
         "fields": {
-            "code": "3",
+            "code": "lm3",
             "name": "Список адресов",
+            "description": ""
+        }
+    },
+    {
+        "model": "terminology.handbook",
+        "pk": 4,
+        "fields": {
+            "code": "dm4",
+            "name": "Справочник индексов",
+            "description": ""
+        }
+    },
+    {
+        "model": "terminology.handbook",
+        "pk": 5,
+        "fields": {
+            "code": "sm5",
+            "name": "Телефонный справочник",
             "description": ""
         }
     }
