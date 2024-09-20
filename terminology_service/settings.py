@@ -136,10 +136,3 @@ INTERNAL_IPS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SWAGGER_SETTINGS = {
-            'TAGS': [
-                {'name': 'Получение списка справочников'},
-                {'name': 'Получение элементов справочника'},
-                {'name': 'Проверка на наличие элемента'},
-            ]
-        }

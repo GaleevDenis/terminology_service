@@ -90,7 +90,7 @@ class SettingsViewSwagger:
                 return check_element_handbook
 
     def tags(self):
-        """Теги отображение в swagger"""
+        """Теги отображения в swagger"""
 
         match self.class_name:
             case 'get_list_handbooks':
@@ -98,4 +98,4 @@ class SettingsViewSwagger:
             case 'get_elements_handbook':
                 return ['Получение элементов справочника']
             case 'check_element_handbook':
-                return ['Проверка на наличие элемента']
+                return ['Проверка на наличие элемента в справочнике']
