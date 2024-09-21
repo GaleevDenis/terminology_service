@@ -108,6 +108,23 @@ C:\Users\{UserName}\Desktop\dev_env\venv\Scripts\activate
 ***Если справочники, элементы, элемент не найден(ы) возвращает ошибку 404 с описанием**.
 
 
+3. \*Имеется возможность запустить **функциональные тесты** сервиса:
+```bat
+(venv) C:\Users\{UserName}\cd Desktop\dev_env\terminology_service\manage.py test
+```
+* **После завершения тестов вы увидите сообщение:** Сообщение **ОК** - все тесты пройдены успешно.
+```bat
+Found 10 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.029s
+
+OK
+```
+
+
 ## Сервис терминологии оперирует следующими объектами и их атрибутами:
 
 
